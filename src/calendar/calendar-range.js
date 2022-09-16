@@ -111,10 +111,30 @@ export default {
       }
       return 0;
     },
+    getRangeEdgeClasses(cellDate, currentDates) {
+      const classes = [];
+      const cellDateValue = cellDate.valueOf();
+      const rangeStartValue = currentDates.at(0).valueOf();
+      const rangeEndValue = currentDates.at(-1).valueOf();
+
+      if (cellDateValue === rangeStartValue) {
+        classes.push("start-of-range");
+      }
+
+      if (rangeStartValue === rangeEndValue || cellDateValue !== rangeStartValue ) {
+        classes.push("end-of-range");
+      }
+      return classes;
+    },
     getRangeClasses(cellDate, currentDates, classnames) {
       const classes = [].concat(this.getClasses(cellDate, currentDates, classnames));
 
-      if (/disabled|active/.test(classnames)) return classes;
+      if (/disabled|active/.test(classnames)){
+        if (currentDates && currentDates.length > 0) {
+          return [...classes, ...this.getRangeEdgeClasses(cellDate, currentDates)];
+        }
+        return classes;
+      };
 
       const inRange = (data, range, fn = v => v.getTime()) => {
         const value = fn(data);
@@ -127,11 +147,8 @@ export default {
       if (currentDates.length === 2 && inRange(cellDate, currentDates)) {
         return classes.concat('in-range');
       }
-      if (
-        currentDates.length === 1 &&
-        this.hoveredValue &&
-        inRange(cellDate, [currentDates[0], this.hoveredValue])
-      ) {
+
+      if (currentDates.length === 1 && this.hoveredValue && inRange(cellDate, [currentDates[0], this.hoveredValue])) {
         return classes.concat('hover-in-range');
       }
 
