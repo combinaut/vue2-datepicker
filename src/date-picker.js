@@ -78,6 +78,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabledOutClick: {
+      type: Boolean,
+      default: false,
+    },
     clearable: {
       type: Boolean,
       default: true,
@@ -225,6 +229,9 @@ export default {
   },
   methods: {
     handleClickOutSide(evt) {
+      if (this.disabledOutClick) {
+        return;
+      }
       const { target } = evt;
       if (!this.$el.contains(target)) {
         this.closePopup();
