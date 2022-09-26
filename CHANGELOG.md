@@ -1,3 +1,13 @@
+<a name="3.19.0"></a>
+# [3.19.0](https://github.com/combinaut/vue2-datepicker/compare/v3.18.0...v3.19.0) (2022-09-26)
+
+
+### Features
+
+* add option to disable out-click ([b336cdd](https://github.com/combinaut/vue2-datepicker/commit/b336cdd))
+
+
+
 <a name="3.18.0"></a>
 # [3.18.0](https://github.com/combinaut/vue2-datepicker/compare/v3.17.0...v3.18.0) (2022-09-16)
 
